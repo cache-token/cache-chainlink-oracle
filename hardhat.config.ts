@@ -5,6 +5,9 @@ import "@nomiclabs/hardhat-etherscan";
 import "hardhat-abi-exporter";
 import * as fs from 'fs';
 
+import * as dotenv from "dotenv";
+dotenv.config({ path: __dirname+'/.env' });
+
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 
@@ -21,7 +24,6 @@ function mnemonic() {
   return "";
 }
 
-
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
@@ -36,31 +38,31 @@ module.exports = {
       */
     },
     rinkeby: {
-      url: "https://eth-rinkeby.alchemyapi.io/v2/5U18UunT56NtgtJdo1-MSMm-sL2DvOcy", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://eth-rinkeby.alchemyapi.io/v2/"+process.env.ALCHEMY_KEY, //<---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     kovan: {
-      url: "https://kovan.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://kovan.infura.io/v3/"+process.env.INFURA_KEY, //<---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     mainnet: {
-      url: "https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://mainnet.infura.io/v3/"+process.env.INFURA_KEY, //<---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://ropsten.infura.io/v3/"+process.env.INFURA_KEY, //<---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     goerli: {
-      url: "https://goerli.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad", //<---- YOUR INFURA ID! (or it won't work)
+      url: "https://goerli.infura.io/v3/"+process.env.INFURA_KEY, //<---- YOUR INFURA ID! (or it won't work)
       accounts: {
         mnemonic: mnemonic(),
       },
@@ -83,7 +85,7 @@ module.exports = {
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
-    apiKey: "DNNQKGVASN6QY3PBEIAWHGP2KCAQBRUNXJ"
+    apiKey: process.env.ETHERSCAN_KEY
   },
   typechain: {
     outDir: 'src/types',
