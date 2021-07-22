@@ -3,12 +3,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "cacheGoldLockedOracle",
+        "name": "cacheGoldLockedOracleParam",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_cacheGoldLockedDataAPIConsumer",
+        "name": "cacheGoldLockedDataAPIConsumerParam",
         "type": "address"
       }
     ],

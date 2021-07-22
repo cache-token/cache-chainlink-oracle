@@ -4,21 +4,61 @@ pragma solidity ^0.8.0;
 import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+/// @author The Cache Gold Team
+/// @title This contract consumes the Cache Gold Oracle web2.0 API and is in turn called by CacheGoldLockedDataCronKeeper.sol
 contract LockedCacheGoldAPIConsumer is ChainlinkClient, Ownable {
     using Chainlink for Chainlink.Request;
     uint256 public lockedGold;
     
+    // Private variable naming convention as per template contract
     address private oracle;
     bytes32 private jobId;
     uint256 private fee;
 
-    constructor() {
+    /**
+     * @dev set the initial oracle and job ID
+     * @param _oracle This is the address of the oracle registered with chainlink
+     * @param _jobId This is the jobid from the list of jobs available in our case it is a HTTP GET request
+     */ 
+    constructor(address _oracle, bytes32 _jobId) {
         setPublicChainlinkToken();
-        oracle = 0x2f90A6D021db21e1B2A077c5a37B3C7E75D15b7e;
-        jobId = "29fa9aa13bf1468788b7cc4a500a45b8";
+        setChainlinkOracle(_oracle);
+        jobId = _jobId;
         fee = 0.1 * 10 ** 18; // 0.1 LINK
     }
+
+    /**
+     * Set oracle address locally
+     * @dev Since we use sendChainlinkRequestTo instead of sendChainlinkRequest we set this locally
+     * @param _oracle  This is the address of the oracle registered with chainlink
+     */ 
+    function setOracle(address _oracle) external onlyOwner {
+        require(_oracle != address(0)); //Check that it is not the zeroth address
+        oracle = _oracle;
+    }
     
+    /**
+     * Set fees, this is the fees that is paid in tribute to the service offered
+     * @param _fee the fee in uint256 here it should be 0.01 Link
+     */ 
+    function setFees(uint256 _fee) external onlyOwner {
+        require(_fee > 0);
+        fee = _fee;
+    }
+
+    /**
+     * Set the job id
+     * @param _jobId This is the jobid from the list of jobs available in our case it is a HTTP GET request
+     */ 
+    function setJobId(bytes32 _jobId) external onlyOwner {
+        jobId = _jobId;
+    }
+
+    /**
+     * Receive the response in the form of requestId
+     * @dev Kept pathOfValue as dynamic in case the path changes in future or we want to accomodate more in the same link
+     * @param _pathOfValue This is the path of the value in the json object response in the url
+     */ 
     function requestedLockedData(string memory _pathOfValue) public returns (bytes32 requestId) 
     {
         require(bytes(_pathOfValue).length != 0, "Requested path is not valid");
@@ -36,8 +76,10 @@ contract LockedCacheGoldAPIConsumer is ChainlinkClient, Ownable {
     }
     
     /**
-     * Receive the response in the form of uint256
-     *  @dev modifier recordChainlinkFulfillment reverts if the sender is not the oracle of the request.
+     * Fulfill the http request by the chainlink oracle
+     * @dev set condition that there should be some minimum locked gold
+     * @param _requestId This is the request ID that was created in requestedLockedData
+     * @param _lockedGold This is the amount of locked gold from the api call
      */ 
     function fulfill(bytes32 _requestId, uint256 _lockedGold) public recordChainlinkFulfillment(_requestId)
     {
@@ -45,14 +87,12 @@ contract LockedCacheGoldAPIConsumer is ChainlinkClient, Ownable {
         lockedGold = _lockedGold;
     }
 
- /**
-     * Receive the response in the form of uint256
-     *  @dev withdrawLINK function to be called by owner if required to withdraw LINK tokens
+    /**
+     * An option to withdraw LINK tokens in case of emergency
      */ 
     function withdrawLINK() public onlyOwner {
         LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
         require(link.transfer(msg.sender, link.balanceOf(address(this))), "Unable to transfer");
     }
-
     
 }

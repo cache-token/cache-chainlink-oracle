@@ -26,6 +26,9 @@ interface LockedCacheGoldAPIConsumerInterface extends ethers.utils.Interface {
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "requestedLockedData(string)": FunctionFragment;
+    "setFees(uint256)": FunctionFragment;
+    "setJobId(bytes32)": FunctionFragment;
+    "setOracle(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "withdrawLINK()": FunctionFragment;
   };
@@ -48,6 +51,12 @@ interface LockedCacheGoldAPIConsumerInterface extends ethers.utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(
+    functionFragment: "setFees",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "setJobId", values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: "setOracle", values: [string]): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
@@ -67,6 +76,9 @@ interface LockedCacheGoldAPIConsumerInterface extends ethers.utils.Interface {
     functionFragment: "requestedLockedData",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setFees", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setJobId", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setOracle", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
@@ -152,6 +164,21 @@ export class LockedCacheGoldAPIConsumer extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setFees(
+      _fee: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setJobId(
+      _jobId: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setOracle(
+      _oracle: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -181,6 +208,21 @@ export class LockedCacheGoldAPIConsumer extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setFees(
+    _fee: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setJobId(
+    _jobId: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setOracle(
+    _oracle: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   transferOwnership(
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -207,6 +249,12 @@ export class LockedCacheGoldAPIConsumer extends BaseContract {
       _pathOfValue: string,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    setFees(_fee: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    setJobId(_jobId: BytesLike, overrides?: CallOverrides): Promise<void>;
+
+    setOracle(_oracle: string, overrides?: CallOverrides): Promise<void>;
 
     transferOwnership(
       newOwner: string,
@@ -258,6 +306,21 @@ export class LockedCacheGoldAPIConsumer extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setFees(
+      _fee: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setJobId(
+      _jobId: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setOracle(
+      _oracle: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -285,6 +348,21 @@ export class LockedCacheGoldAPIConsumer extends BaseContract {
 
     requestedLockedData(
       _pathOfValue: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setFees(
+      _fee: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setJobId(
+      _jobId: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setOracle(
+      _oracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
