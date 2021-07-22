@@ -34,8 +34,8 @@ npx hardhat --network kovan run scripts/deploy.ts
 
 ## Previous Deployment Data
 https://keeper.chain.link/kovan/upkeeps/223  //This is stale
-https://kovan.etherscan.io/address/0xaDc4527C4EC3795a34900678272AA5Ac040390f3#code
-https://kovan.etherscan.io/address/0x59202e58Cc15e27e4d98a819080172c06E76c017#code
+https://kovan.etherscan.io/address/0xB6c4f8A9D731d38fd8549F7F2089Db47EF26901e#code  //LockedCacheGoldAPIConsumer
+https://kovan.etherscan.io/address/0xA78e17eaBB69F1f1c8A5e29578ffe51e961ff38C#code   //CacheGoldLockedDataCronKeeper
 
 ////// TODO:REMEMBER TO SEND THE FINAL ORACLE AND JOB ID TO  CHAINLINK , also check if these are going to change in future and if so we need to accomodate.
 //////TODO: Change optimization based on number of calls expected

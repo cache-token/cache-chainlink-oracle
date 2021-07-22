@@ -22,7 +22,7 @@ contract LockedCacheGoldAPIConsumer is ChainlinkClient, Ownable {
      */ 
     constructor(address _oracle, bytes32 _jobId) {
         setPublicChainlinkToken();
-        setChainlinkOracle(_oracle);
+        oracle = _oracle;
         jobId = _jobId;
         fee = 0.1 * 10 ** 18; // 0.1 LINK
     }
