@@ -27,12 +27,15 @@ npx hardhat test
 npx hardhat --network kovan run scripts/deploy.ts
 ```
 
+## Caveats
+1. We need to fund the LockedCacheGoldAPIConsumer with LINK tokens
+2. We need to fund the CacheGoldLockedDataCronKeeper with LINK Tokens via the keeper network at https://keeper.chain.link/
+
 
 ## Previous Deployment Data
-https://keeper.chain.link/kovan/upkeeps/223
-https://kovan.etherscan.io/address/0xfd30559bCE2ae0dd157De5Aaa70DBF205E24f8aD#readContract
-https://kovan.etherscan.io/address/0x0275C1A3051AA84047715e93068bB7143B8787E6#internaltx
+https://keeper.chain.link/kovan/upkeeps/283  //This is stale
+https://kovan.etherscan.io/address/0x13BdaFC115314b6D2b4b8E8DFd23A7f1Eeaa206A#code  //LockedCacheGoldAPIConsumer
+https://kovan.etherscan.io/address/0xD4b89c118F6D0CE49A81F194540f1b37392c4675#code   //CacheGoldLockedDataCronKeeper
 
-
-////// TODO:REMEMBER TO SEND THE FINAL ORACLE AND JOB ID TO  CHAINLINK
+////// TODO:REMEMBER TO SEND THE FINAL ORACLE AND JOB ID TO  CHAINLINK , also check if these are going to change in future and if so we need to accomodate.
 //////TODO: Change optimization based on number of calls expected
