@@ -33,9 +33,9 @@ contract CacheGoldLockedDataCronKeeper is KeeperCompatibleInterface {
      * Check Upkeep called by keepers to check if upkeep is required
      *  @dev If there is a change in the stored lockedAmount vs the actual in the Cache Gramchain Locked Gold Contract then perform upkeep
      */ 
-    function checkUpkeep(bytes calldata checkData) external  override returns  (bool upkeepNeeded, bytes memory performData)   {
+    function checkUpkeep(bytes calldata checkData) external view override returns  (bool upkeepNeeded, bytes memory performData)   {
         
-        (bool success, bytes memory callData) = address(_cacheGoldLockedOracle).call(abi.encodeWithSignature("lockedGold()"));
+        (bool success, bytes memory callData) = address(_cacheGoldLockedOracle).staticcall(abi.encodeWithSignature("lockedGold()"));
         require(success, "Unable to fetch locked gold oracle data");
         (uint256 lockedGoldInCacheOracle) = abi.decode(callData, (uint256));
         if(lockedGoldInCacheOracle != _lockedGold){
@@ -51,7 +51,7 @@ contract CacheGoldLockedDataCronKeeper is KeeperCompatibleInterface {
      * @param performData The upkeep that needs to be performed address(_cacheGoldLockedOracle).call(abi.encodeWithSignature("lockedGold()"));
      */ 
     function performUpkeep(bytes calldata performData) external override {
-        (bool success, bytes memory callData) = address(_cacheGoldLockedOracle).call(abi.encodeWithSignature("lockedGold()"));
+        (bool success, bytes memory callData) = address(_cacheGoldLockedOracle).staticcall(abi.encodeWithSignature("lockedGold()"));
         require(success, "Unable to fetch locked gold oracle data");
         (uint256 lockedGoldInCacheOracle) = abi.decode(callData, (uint256));
         _lockedGold = lockedGoldInCacheOracle;

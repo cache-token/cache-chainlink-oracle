@@ -117,8 +117,10 @@ export class CacheGoldLockedDataCronKeeper extends BaseContract {
 
     checkUpkeep(
       checkData: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      overrides?: CallOverrides
+    ): Promise<
+      [boolean, string] & { upkeepNeeded: boolean; performData: string }
+    >;
 
     performUpkeep(
       performData: BytesLike,
@@ -132,8 +134,10 @@ export class CacheGoldLockedDataCronKeeper extends BaseContract {
 
   checkUpkeep(
     checkData: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    overrides?: CallOverrides
+  ): Promise<
+    [boolean, string] & { upkeepNeeded: boolean; performData: string }
+  >;
 
   performUpkeep(
     performData: BytesLike,
@@ -169,7 +173,7 @@ export class CacheGoldLockedDataCronKeeper extends BaseContract {
 
     checkUpkeep(
       checkData: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     performUpkeep(
@@ -189,7 +193,7 @@ export class CacheGoldLockedDataCronKeeper extends BaseContract {
 
     checkUpkeep(
       checkData: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     performUpkeep(
