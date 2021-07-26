@@ -18,7 +18,7 @@ yarn install
 ```
 npx hardhat compile
 ```
-4. Test 
+4. Test (TESTS ARE INCOMPLETE)
 ```
 npx hardhat test
 ```
@@ -33,9 +33,10 @@ npx hardhat --network kovan run scripts/deploy.ts
 
 
 ## Previous Deployment Data
-https://keeper.chain.link/kovan/upkeeps/283  //This is stale
-https://kovan.etherscan.io/address/0x13BdaFC115314b6D2b4b8E8DFd23A7f1Eeaa206A#code  //LockedCacheGoldAPIConsumer
-https://kovan.etherscan.io/address/0xD4b89c118F6D0CE49A81F194540f1b37392c4675#code   //CacheGoldLockedDataCronKeeper
+https://keeper.chain.link/kovan/upkeeps/294 
+https://kovan.etherscan.io/address/0x7aa81948460deA257ce1CC77582A427291E42a32#events //LockedCacheGoldAPIConsumer
+https://kovan.etherscan.io/address/0x5F946F132537a7Adb7435d26aCE7BEdd0a7d2874#code  //CacheGoldLockedDataCronKeeper
 
-////// TODO:REMEMBER TO SEND THE FINAL ORACLE AND JOB ID TO  CHAINLINK , also check if these are going to change in future and if so we need to accomodate.
+TODOs:
+////// TODO:Pass the deployed oracle and job id to chainlink team.
 //////TODO: Change optimization based on number of calls expected
