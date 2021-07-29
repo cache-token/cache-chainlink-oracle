@@ -33,10 +33,13 @@ npx hardhat --network kovan run scripts/deploy.ts
 
 
 ## Previous Deployment Data
-https://keeper.chain.link/kovan/upkeeps/294 
-https://kovan.etherscan.io/address/0x7aa81948460deA257ce1CC77582A427291E42a32#events //LockedCacheGoldAPIConsumer
-https://kovan.etherscan.io/address/0x5F946F132537a7Adb7435d26aCE7BEdd0a7d2874#code  //CacheGoldLockedDataCronKeeper
+https://keeper.chain.link/kovan/upkeeps/310 
+https://kovan.etherscan.io/address/0xaa23d692D93Ee78fDcDe00618F71840D55929D50#code//LockedCacheGoldAPIConsumer
+https://kovan.etherscan.io/address/0x663a06c5E28a43Fd887bDD97ef36458CF82b1f4f#code  //CacheGoldLockedDataCronKeeper
 
-TODOs:
-////// TODO:Pass the deployed oracle and job id to chainlink team.
+Oracle:
+0xEc77e8d3a63D4AC8341dF6Ef4E07d2866fCa83D6
+JobID: 42ad0fffcd6a44fdbd58bd8a7a34cdd1
+https://market.link/jobs/7138111d-7a7a-4def-a616-633b85b9a285?network=1
+
 //////TODO: Change optimization based on number of calls expected

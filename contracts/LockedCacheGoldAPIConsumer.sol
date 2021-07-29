@@ -107,7 +107,7 @@ contract LockedCacheGoldAPIConsumer is ChainlinkClient, Ownable {
      */ 
     function fulfill(bytes32 _requestId, uint256 _lockedGold) public recordChainlinkFulfillment(_requestId)
     {
-        require(_lockedGold >= 1, "Locked Gold has to have a value greater than or atleast equal to 1");
+        require(_lockedGold >= 1, "Locked Gold has to have a value greater than or equal to 1");
         lockedGold = _lockedGold;
     }
 
